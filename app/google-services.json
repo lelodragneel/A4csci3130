@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "891301546003",
+    "firebase_url": "https://fish-82678.firebaseio.com",
+    "project_id": "fish-82678",
+    "storage_bucket": "fish-82678.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:891301546003:android:6409f2945731fca6",
+        "android_client_info": {
+          "package_name": "com.acme.a3csci3130"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "891301546003-4gms38l67cmpd075d2ulek518lt3hlv4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSF7da9FDV-cwncIErs1GmWxP3FhVsF6g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
