@@ -11,7 +11,7 @@ public class DetailViewActivity extends Activity {
 
     private EditText editText_number, editText_name, editText_address;
     private Spinner spinner_province, spinner_type;
-    Business receivedBusinessInfo;
+    private Business receivedBusinessInfo;
     private MyApplicationData appState;
 
     @Override
@@ -41,6 +41,13 @@ public class DetailViewActivity extends Activity {
         }
     }
 
+    /**
+     * Given a string item, this returns the spinner index of that item
+     *
+     * @param spinner   The spinner to search the item against
+     * @param item      String to find the index of
+     * @return          Index of the item in the spinner
+     */
     public int getSpinnerIndexOf(Spinner spinner, String item) {
         Adapter spinAdapter = spinner.getAdapter();
         for (int i = 0; i < spinAdapter.getCount(); i++) {
@@ -51,6 +58,12 @@ public class DetailViewActivity extends Activity {
         return 0;
     }
 
+    /**
+     * Updates the db of the currently selected business with the edittext values
+     * This is called when Update button is clicked
+     *
+     * @param v     View passed by the button clicked
+     */
     public void updateContact(View v) {
         int number = Integer.parseInt(editText_number.getText().toString());
         String name = editText_name.getText().toString();
@@ -64,7 +77,14 @@ public class DetailViewActivity extends Activity {
         appState.firebaseReference.child(receivedBusinessInfo.getId()).setValue(business);
     }
 
+    /**
+     * Delete the subdatabase and its children for the given business id
+     * This is called when Erase button is clicked
+     *
+     * @param v     View passed by the button clicked
+     */
     public void eraseContact(View v) {
         appState.firebaseReference.child(receivedBusinessInfo.getId()).removeValue();
+        finish();
     }
 }

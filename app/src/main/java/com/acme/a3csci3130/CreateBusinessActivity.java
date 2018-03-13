@@ -26,6 +26,11 @@ public class CreateBusinessActivity extends Activity {
         spinner_type = (Spinner) findViewById(R.id.spinner_type);
     }
 
+    /**
+     * Creates a new business to database given the edittext data
+     *
+     * @param v     The view passed by the button
+     */
     public void submitInfoButton(View v) {
         //each entry needs a unique ID
         String id = appState.firebaseReference.push().getKey();

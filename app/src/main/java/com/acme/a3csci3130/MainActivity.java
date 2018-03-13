@@ -51,14 +51,24 @@ public class MainActivity extends Activity {
         });
     }
 
-    public void newBusinessButton(View v)
-    {
+    /**
+     * Start the activity that lets you create a new business
+     * This is called when New button is clicked
+     *
+     * @param v     The view passed by the button
+     */
+    public void newBusinessButton(View v) {
         Intent intent = new Intent(this, CreateBusinessActivity.class);
         startActivity(intent);
     }
 
-    private void showDetailView(Business business)
-    {
+    /**
+     * Start the activity that lets you update or delete a business
+     * This is called when a listview item is clicked
+     *
+     * @param business      The business object that was clicked from listview
+     */
+    private void showDetailView(Business business) {
         Intent intent = new Intent(this, DetailViewActivity.class);
         intent.putExtra("Business", business);
         startActivity(intent);
