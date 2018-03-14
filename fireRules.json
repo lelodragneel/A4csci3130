@@ -10,7 +10,7 @@
           ".validate": "newData.isString() && newData.val().length >= 2 && newData.val().length <= 48"
         },
         "number": {
-          ".validate": "newData.val().matches(/^[0-9]{9}/) && newData.val().length == 9"
+          ".validate": "newData.isNumber() && newData.val() < 1000000000"
         },
         "address": {
           ".validate": "newData.val().length < 50"
