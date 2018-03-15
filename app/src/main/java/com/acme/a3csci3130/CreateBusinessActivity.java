@@ -11,13 +11,16 @@ public class CreateBusinessActivity extends Activity {
     private EditText editText_number, editText_name, editText_address;
     private Spinner spinner_province, spinner_type;
     private MyApplicationData appState;
+    private FirebaseOperations operations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_business_activity);
+
         //Get the app wide shared variables
         appState = ((MyApplicationData) getApplicationContext());
+        operations = new FirebaseOperations(appState);
 
         editText_number = (EditText) findViewById(R.id.editText_number);
         editText_name = (EditText) findViewById(R.id.editText_name);
@@ -42,8 +45,7 @@ public class CreateBusinessActivity extends Activity {
 
         Business business = new Business(id, number, name, address, province, type);
 
-        appState.firebaseReference.child(id).setValue(business);
-
+        operations.createBusiness(business);
         finish();
     }
 }

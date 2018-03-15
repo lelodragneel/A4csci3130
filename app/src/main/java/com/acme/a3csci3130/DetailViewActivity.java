@@ -13,6 +13,7 @@ public class DetailViewActivity extends Activity {
     private Spinner spinner_province, spinner_type;
     private Business receivedBusinessInfo;
     private MyApplicationData appState;
+    private FirebaseOperations operations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +21,9 @@ public class DetailViewActivity extends Activity {
         setContentView(R.layout.activity_detail_view);
         receivedBusinessInfo = (Business) getIntent().getSerializableExtra("Business");
 
+        //Get the app wide shared variables
         appState = ((MyApplicationData) getApplicationContext());
+        operations = new FirebaseOperations(appState);
 
         editText_number = (EditText) findViewById(R.id.editText_number);
         editText_name = (EditText) findViewById(R.id.editText_name);
@@ -64,7 +67,7 @@ public class DetailViewActivity extends Activity {
      *
      * @param v     View passed by the button clicked
      */
-    public void updateContact(View v) {
+    public void updateBusiness(View v) {
         int number = Integer.parseInt(editText_number.getText().toString());
         String name = editText_name.getText().toString();
         String address = editText_address.getText().toString();
@@ -74,7 +77,8 @@ public class DetailViewActivity extends Activity {
         Business business = new Business(receivedBusinessInfo.getId(), number, name, address,
                 province, type);
 
-        appState.firebaseReference.child(receivedBusinessInfo.getId()).setValue(business);
+        operations.updateBusiness(business);
+        finish();
     }
 
     /**
@@ -83,8 +87,8 @@ public class DetailViewActivity extends Activity {
      *
      * @param v     View passed by the button clicked
      */
-    public void eraseContact(View v) {
-        appState.firebaseReference.child(receivedBusinessInfo.getId()).removeValue();
+    public void eraseBusiness(View v) {
+        operations.deleteBusiness(receivedBusinessInfo.getId());
         finish();
     }
 }
