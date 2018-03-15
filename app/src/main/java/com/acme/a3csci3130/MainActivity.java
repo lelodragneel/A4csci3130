@@ -15,6 +15,7 @@ public class MainActivity extends Activity {
 
     private ListView listView_businesses;
     private FirebaseListAdapter<Business> firebaseAdapter;
+    private MyApplicationData appData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +23,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         //Get the app wide shared variables
-        MyApplicationData appData = (MyApplicationData) getApplication();
+        appData = (MyApplicationData) getApplication();
 
         //Set-up Firebase
         appData.firebaseDBInstance = FirebaseDatabase.getInstance();

@@ -23,7 +23,7 @@ public class DetailViewActivity extends Activity {
 
         //Get the app wide shared variables
         appState = ((MyApplicationData) getApplicationContext());
-        operations = new FirebaseOperations(appState);
+        operations = new FirebaseOperations();
 
         editText_number = (EditText) findViewById(R.id.editText_number);
         editText_name = (EditText) findViewById(R.id.editText_name);

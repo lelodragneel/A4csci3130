@@ -1,9 +1,11 @@
 package com.acme.a3csci3130;
 
-import android.util.Log;
+import android.app.Application;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -13,20 +15,17 @@ import java.util.List;
  * Created by Lelo on 3/14/2018.
  */
 
-public class FirebaseOperations {
+public class FirebaseOperations extends Application {
 
-    private MyApplicationData appState;
     private static List<Business> businesses;
+    private DatabaseReference ref;
 
     /**
      * Constructor that asynchronously updates a list of businesses
-     *
-     * @param appState      The state from MyApplicationData which is needed for firebase
      */
-    protected FirebaseOperations(MyApplicationData appState) {
-        this.appState = appState;
-
-        appState.firebaseReference.addValueEventListener(new ValueEventListener() {
+    protected FirebaseOperations() {
+        ref = FirebaseDatabase.getInstance().getReference().child("businesses");
+        ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -50,8 +49,7 @@ public class FirebaseOperations {
      */
     public void updateBusiness(Business business) {
         String businessID = business.getId();
-        appState.firebaseReference.child(businessID).setValue(business);
-        Log.e("BUSINESS","" + readBusiness(businessID).getName());
+        ref.child(businessID).setValue(business);
     }
 
     /**
@@ -60,7 +58,7 @@ public class FirebaseOperations {
      * @param businessID        The id of the business object to delete
      */
     public void deleteBusiness(String businessID) {
-        appState.firebaseReference.child(businessID).removeValue();
+        ref.child(businessID).removeValue();
     }
 
     /**
@@ -70,7 +68,7 @@ public class FirebaseOperations {
      */
     public void createBusiness(Business business) {
         String businessID = business.getId();
-        appState.firebaseReference.child(businessID).setValue(business);
+        ref.child(businessID).setValue(business);
     }
 
     /**
